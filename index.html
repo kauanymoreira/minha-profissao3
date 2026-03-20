@@ -3,11 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> NutriVida Hospitalar - Guia da Profissão</title>
+    <title>NutriVida Hospitalar - Guia da Profissão</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos específicos para o sistema de comentários (para não conflitar com o CSS principal) */
+        .comentarios-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .comentarios-header {
+            background: linear-gradient(135deg, #2e7d73 0%, #1e5a52 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .comentarios-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .comment-form {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2e7d73;
+        }
+        .btn-submit {
+            background: #2e7d73;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: transform 0.2s;
+        }
+        .btn-submit:hover {
+            background: #1e5a52;
+            transform: translateY(-2px);
+        }
+        .comments-list {
+            margin-top: 20px;
+        }
+        .comment {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        .comment-author {
+            font-weight: bold;
+            color: #2e7d73;
+            font-size: 1.1em;
+        }
+        .comment-date {
+            color: #999;
+            font-size: 0.85em;
+        }
+        .comment-text {
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        .comment-actions {
+            display: flex;
+            gap: 15px;
+        }
+        .btn-like, .btn-delete {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9em;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .btn-like {
+            color: #e74c3c;
+        }
+        .btn-like:hover {
+            background: #ffe6e6;
+        }
+        .btn-delete {
+            color: #999;
+        }
+        .btn-delete:hover {
+            background: #ffe6e6;
+            color: #e74c3c;
+        }
+        .like-count {
+            margin-left: 5px;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .empty-comments {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+        .stats {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        @media (max-width: 600px) {
+            .comment-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -22,8 +168,7 @@
                 <li><a href="#enem">Nota ENEM</a></li>
                 <li><a href="#ingressar">Como Ingressar</a></li>
                 <li><a href="#faculdades">Faculdades</a></li>
-                <li><a href="#comentário">comentários</a></li>
-                
+                <li><a href="#comentarios">Comentários</a></li>
             </ul>
             <div class="hamburger">
                 <span class="bar"></span>
@@ -174,6 +319,7 @@
                 </div>
             </div>
         </section>
+
         <section id="faculdades" class="section">
             <div class="container">
                 <h2 class="section-title">Melhores Faculdades de Nutrição</h2>
@@ -213,275 +359,82 @@
                         <p><strong>Localização:</strong> Campinas - SP</p>
                         <p><strong>Nota MEC:</strong> 4</p>
                         <p><strong>Diferenciais:</strong> Estrutura, estágios, empregabilidade</p>
-                     </div>
+                    </div>
                 </div>
             </div>
         </section>
-        
-          <section id="comentários" class="section">
+
+        <!-- Seção de Comentários -->
+        <section id="comentarios" class="section bg-light">
             <div class="container">
-                <h2 class="section-title"> comentários</h2>
-                <div class="comentários">
-                <div class="comentários-grid">
-                    <div class="comentários-card">
-                        
-            
-
-
-
-
-                <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Comentários</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #b5e9c7 0%, #b4ddb7 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #c0ecc8 0%, #b9e4c2 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            opacity: 0.9;
-        }
-
-        .comments-section {
-            padding: 30px;
-        }
-
-        .comment-form {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #fbfffc;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #d2e9d2;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #cbf5cf;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .btn-submit {
-            background: linear-gradient(135deg, #c3e2cc 0%, #d9eee2 100%);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 500;
-            transition: transform 0.2s;
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-2px);
-        }
-
-        .btn-submit:active {
-            transform: translateY(0);
-        }
-
-        .comments-list {
-            margin-top: 20px;
-        }
-
-        .comment {
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 15px;
-            transition: box-shadow 0.3s;
-        }
-
-        .comment:hover {
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .comment-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-        }
-
-        .comment-author {
-            font-weight: bold;
-            color: #667eea;
-            font-size: 1.1em;
-        }
-
-        .comment-date {
-            color: #999;
-            font-size: 0.85em;
-        }
-
-        .comment-text {
-            color: #555;
-            line-height: 1.5;
-            margin-bottom: 10px;
-        }
-
-        .comment-actions {
-            display: flex;
-            gap: 15px;
-        }
-
-        .btn-like, .btn-delete {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 0.9em;
-            padding: 5px 10px;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-
-        .btn-like {
-            color: #e74c3c;
-        }
-
-        .btn-like:hover {
-            background: #ffe6e6;
-        }
-
-        .btn-delete {
-            color: #999;
-        }
-
-        .btn-delete:hover {
-            background: #ffe6e6;
-            color: #e74c3c;
-        }
-
-        .like-count {
-            margin-left: 5px;
-            color: #e74c3c;
-            font-weight: bold;
-        }
-
-        .empty-comments {
-            text-align: center;
-            padding: 40px;
-            color: #999;
-        }
-
-        .stats {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        @media (max-width: 600px) {
-            .comments-section {
-                padding: 20px;
-            }
-            
-            .comment-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 5px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>💬 Sistema de Comentários</h1>
-            <p>Compartilhe sua opinião!</p>
-        </div>
-
-        <div class="comments-section">
-            <div class="comment-form">
-                <h3>Deixe seu comentário</h3>
-                <form id="commentForm">
-                    <div class="form-group">
-                        <label for="name">Nome:</label>
-                        <input type="text" id="name" required placeholder="Seu nome" maxlength="50">
+                <h2 class="section-title">Comentários</h2>
+                <div class="comentarios-container">
+                    <div class="comentarios-header">
+                        <h3>💬 Compartilhe sua opinião</h3>
+                        <p>Deixe seu comentário sobre a profissão ou o site</p>
                     </div>
-                    <div class="form-group">
-                        <label for="comment">Comentário:</label>
-                        <textarea id="comment" required placeholder="Escreva seu comentário aqui..." maxlength="500"></textarea>
+                    <div class="comments-section" style="padding: 30px;">
+                        <div class="comment-form">
+                            <h3>Deixe seu comentário</h3>
+                            <form id="commentForm">
+                                <div class="form-group">
+                                    <label for="name">Nome:</label>
+                                    <input type="text" id="name" required placeholder="Seu nome" maxlength="50">
+                                </div>
+                                <div class="form-group">
+                                    <label for="comment">Comentário:</label>
+                                    <textarea id="comment" required placeholder="Escreva seu comentário aqui..." maxlength="500"></textarea>
+                                </div>
+                                <button type="submit" class="btn-submit">Publicar Comentário</button>
+                            </form>
+                        </div>
+
+                        <div class="stats" id="stats">
+                            <span id="commentCount">0</span> comentários no total
+                        </div>
+
+                        <div class="comments-list" id="commentsList">
+                            <div class="empty-comments">
+                                Nenhum comentário ainda. Seja o primeiro a comentar!
+                            </div>
+                        </div>
                     </div>
-                    <button type="submit" class="btn-submit">Publicar Comentário</button>
-                </form>
-            </div>
-
-            <div class="stats" id="stats">
-                <span id="commentCount">0</span> comentários no total
-            </div>
-
-            <div class="comments-list" id="commentsList">
-                <div class="empty-comments">
-                    Nenhum comentário ainda. Seja o primeiro a comentar!
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Nutri<span>Hospitalar</span></h3>
+                    <p>Seu guia completo sobre a profissão de Nutrição Hospitalar no Brasil</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#salario">Salário</a></li>
+                        <li><a href="#enem">Nota ENEM</a></li>
+                        <li><a href="#faculdades">Faculdades</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contato">
+                    <h4>Contato</h4>
+                    <p>✉️ contato@nutrihospitalar.com.br</p>
+                    <p>📞 (11) 99999-9999</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Nutrição Hospitalar - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
     <script>
-        // Carregar comentários do localStorage
+        // Sistema de Comentários
         let comments = [];
 
         function loadComments() {
@@ -504,7 +457,7 @@
                 date: new Date().toISOString(),
                 likes: 0
             };
-            comments.unshift(newComment); // Adiciona no início
+            comments.unshift(newComment);
             saveComments();
             displayComments();
         }
@@ -539,6 +492,12 @@
             }
         }
 
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
         function displayComments() {
             const commentsList = document.getElementById('commentsList');
             const commentCount = document.getElementById('commentCount');
@@ -569,13 +528,6 @@
             `).join('');
         }
 
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        // Form submission
         document.getElementById('commentForm').addEventListener('submit', (e) => {
             e.preventDefault();
             
@@ -602,59 +554,15 @@
             
             addComment(name, text);
             
-            // Limpar formulário
             nameInput.value = '';
             commentInput.value = '';
             
-            // Scroll para o novo comentário
             setTimeout(() => {
                 document.querySelector('.comment')?.scrollIntoView({ behavior: 'smooth' });
             }, 100);
         });
 
-        // Inicializar
         loadComments();
     </script>
 </body>
-
-
-
-
-     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <h3>Nutri<span>Hospitalar</span></h3>
-                    <p>Seu guia completo sobre a profissão de Nutrição Hospitalar no Brasil</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Links Rápidos</h4>
-                    <ul>
-                        <li><a href="#sobre">Sobre</a></li>
-                        <li><a href="#salario">Salário</a></li>
-                        <li><a href="#enem">Nota ENEM</a></li>
-                        <li><a href="#faculdades">Faculdades</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contato">
-                    <h4>Contato</h4>
-                    <p>✉️ contato@nutrihospitalar.com.br</p>
-                    <p>📞 (11) 99999-9999</p>
-                </div>
-            </div>
-        </div>
-
-
-       
-    </main>
-
-
-            <div class="footer-bottom">
-                <p>&copy; 2024 Nutrição Hospitalar - Todos os direitos reservados</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-
 </html>
